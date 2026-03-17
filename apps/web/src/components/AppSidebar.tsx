@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/sidebar";
 
 const mainItems = [
-  { title: "LMS Home", url: "/", icon: LayoutDashboard },
+  { title: "Trang chủ LMS", url: "/", icon: LayoutDashboard },
 ];
 
 export function AppSidebar() {
@@ -44,7 +44,7 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Main</SidebarGroupLabel>
+          <SidebarGroupLabel>Chính</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {mainItems.map((item) => (

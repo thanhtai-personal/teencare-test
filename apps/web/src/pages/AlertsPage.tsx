@@ -5,16 +5,16 @@ import { Button } from "@/components/ui/button";
 import { Bell, AlertTriangle, Lightbulb, CheckCircle, Shield } from "lucide-react";
 
 const alerts = [
-  { id: 1, severity: "high" as const, title: "Unusual late-night phone usage", desc: "Emma was active on her phone between 1–3 AM last night. This is unusual for her pattern.", time: "3h ago", icon: AlertTriangle },
-  { id: 2, severity: "medium" as const, title: "Screen time exceeded daily limit", desc: "Total screen time reached 7.5 hours yesterday, exceeding the 5-hour family goal.", time: "12h ago", icon: Shield },
-  { id: 3, severity: "low" as const, title: "New follower from unknown account", desc: "Emma received a follow request from an account not in her known contacts list.", time: "1d ago", icon: Bell },
+  { id: 1, severity: "high" as const, title: "Sử dụng điện thoại khuya bất thường", desc: "Đêm qua Emma dùng điện thoại trong khoảng 1–3 giờ sáng, khác với thói quen thường ngày.", time: "3 giờ trước", icon: AlertTriangle },
+  { id: 2, severity: "medium" as const, title: "Vượt giới hạn thời gian màn hình", desc: "Tổng thời gian màn hình hôm qua là 7.5 giờ, vượt mục tiêu gia đình là 5 giờ.", time: "12 giờ trước", icon: Shield },
+  { id: 3, severity: "low" as const, title: "Có người theo dõi mới từ tài khoản lạ", desc: "Emma nhận yêu cầu theo dõi từ một tài khoản không có trong danh sách liên hệ quen thuộc.", time: "1 ngày trước", icon: Bell },
 ];
 
 const recommendations = [
-  { title: "Start a digital detox weekend", desc: "Research shows periodic tech breaks improve teen mental health. Try a family no-screen Saturday.", category: "Wellness" },
-  { title: "Open conversation about online friends", desc: "Emma has been chatting with 3 new contacts this week. A casual check-in could help ensure safety.", category: "Safety" },
-  { title: "Celebrate Emma's creative work", desc: "She spent 4 hours on digital art this week. Positive reinforcement could boost confidence.", category: "Engagement" },
-  { title: "Set collaborative screen time goals", desc: "Involving teens in setting their own limits leads to 60% better compliance than imposed rules.", category: "Parenting Tip" },
+  { title: "Bắt đầu cuối tuần giảm thiết bị số", desc: "Nghiên cứu cho thấy nghỉ công nghệ định kỳ giúp cải thiện sức khỏe tinh thần tuổi teen. Hãy thử một ngày thứ Bảy không màn hình.", category: "Sức khỏe tinh thần" },
+  { title: "Mở cuộc trò chuyện về bạn bè online", desc: "Tuần này Emma trò chuyện với 3 liên hệ mới. Một cuộc hỏi thăm nhẹ nhàng có thể giúp đảm bảo an toàn.", category: "An toàn" },
+  { title: "Ghi nhận các sản phẩm sáng tạo của Emma", desc: "Tuần này Emma dành 4 giờ cho vẽ kỹ thuật số. Khích lệ đúng lúc có thể tăng sự tự tin.", category: "Gắn kết" },
+  { title: "Đặt mục tiêu màn hình cùng con", desc: "Khi teen cùng tham gia đặt giới hạn, mức độ tuân thủ thường cao hơn nhiều so với áp đặt một chiều.", category: "Mẹo phụ huynh" },
 ];
 
 const severityStyles = {
@@ -29,19 +29,25 @@ const severityBadge = {
   low: "outline" as const,
 };
 
+const severityText = {
+  high: "Cao",
+  medium: "Trung bình",
+  low: "Thấp",
+};
+
 export default function AlertsPage() {
   return (
     <DashboardLayout>
       <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-bold">Alerts & Recommendations</h1>
-          <p className="text-muted-foreground">Stay informed about important events and get AI-powered advice.</p>
+          <h1 className="text-2xl font-bold">Cảnh báo và gợi ý</h1>
+          <p className="text-muted-foreground">Theo dõi các sự kiện quan trọng và nhận tư vấn từ AI.</p>
         </div>
 
         <Card>
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
-              <Bell className="h-4 w-4" /> Active Alerts
+              <Bell className="h-4 w-4" /> Cảnh báo đang hoạt động
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -51,14 +57,14 @@ export default function AlertsPage() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
                     <p className="text-sm font-medium">{a.title}</p>
-                    <Badge variant={severityBadge[a.severity]} className="text-[10px]">{a.severity}</Badge>
+                    <Badge variant={severityBadge[a.severity]} className="text-[10px]">{severityText[a.severity]}</Badge>
                   </div>
                   <p className="text-xs text-muted-foreground">{a.desc}</p>
                   <p className="text-xs text-muted-foreground mt-1">{a.time}</p>
                 </div>
                 <div className="flex gap-2 shrink-0">
-                  <Button size="sm" variant="outline">Dismiss</Button>
-                  <Button size="sm">Review</Button>
+                  <Button size="sm" variant="outline">Bỏ qua</Button>
+                  <Button size="sm">Xem chi tiết</Button>
                 </div>
               </div>
             ))}
@@ -68,7 +74,7 @@ export default function AlertsPage() {
         <Card>
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
-              <Lightbulb className="h-4 w-4 text-warning" /> AI Recommendations
+              <Lightbulb className="h-4 w-4 text-warning" /> Gợi ý từ AI
             </CardTitle>
           </CardHeader>
           <CardContent className="grid gap-3 sm:grid-cols-2">
@@ -79,7 +85,7 @@ export default function AlertsPage() {
                 </div>
                 <p className="text-sm font-medium mb-1">{r.title}</p>
                 <p className="text-xs text-muted-foreground">{r.desc}</p>
-                <Button size="sm" variant="ghost" className="mt-2 h-7 text-xs">Learn more →</Button>
+                <Button size="sm" variant="ghost" className="mt-2 h-7 text-xs">Tìm hiểu thêm →</Button>
               </div>
             ))}
           </CardContent>

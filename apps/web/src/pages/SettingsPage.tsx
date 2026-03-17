@@ -8,12 +8,12 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Shield, Users, Eye, Bell } from "lucide-react";
+import { Shield, Users, Bell } from "lucide-react";
 
 const familyMembers = [
-  { name: "Jessica Martinez", role: "Parent (Admin)", email: "jessica@email.com" },
-  { name: "Carlos Martinez", role: "Parent", email: "carlos@email.com" },
-  { name: "Emma Martinez", role: "Teen", email: "emma@email.com" },
+  { name: "Jessica Martinez", role: "Phụ huynh (Quản trị)", email: "jessica@email.com" },
+  { name: "Carlos Martinez", role: "Phụ huynh", email: "carlos@email.com" },
+  { name: "Emma Martinez", role: "Thiếu niên", email: "emma@email.com" },
 ];
 
 export default function SettingsPage() {
@@ -21,27 +21,27 @@ export default function SettingsPage() {
     <DashboardLayout>
       <div className="space-y-6 max-w-3xl">
         <div>
-          <h1 className="text-2xl font-bold">Settings</h1>
-          <p className="text-muted-foreground">Manage your account, family roles, and privacy preferences.</p>
+          <h1 className="text-2xl font-bold">Cài đặt</h1>
+          <p className="text-muted-foreground">Quản lý tài khoản, vai trò gia đình và tùy chọn quyền riêng tư.</p>
         </div>
 
         <Tabs defaultValue="general">
           <TabsList>
-            <TabsTrigger value="general">General</TabsTrigger>
-            <TabsTrigger value="roles">Family & Roles</TabsTrigger>
-            <TabsTrigger value="privacy">Privacy</TabsTrigger>
-            <TabsTrigger value="notifications">Notifications</TabsTrigger>
+            <TabsTrigger value="general">Chung</TabsTrigger>
+            <TabsTrigger value="roles">Gia đình và vai trò</TabsTrigger>
+            <TabsTrigger value="privacy">Riêng tư</TabsTrigger>
+            <TabsTrigger value="notifications">Thông báo</TabsTrigger>
           </TabsList>
 
           <TabsContent value="general" className="space-y-4 mt-4">
             <Card>
               <CardHeader>
-                <CardTitle className="text-base">Account Settings</CardTitle>
+                <CardTitle className="text-base">Cài đặt tài khoản</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
-                    <Label>Full Name</Label>
+                    <Label>Họ và tên</Label>
                     <Input defaultValue="Jessica Martinez" />
                   </div>
                   <div className="space-y-2">
@@ -50,17 +50,17 @@ export default function SettingsPage() {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label>Time Zone</Label>
+                  <Label>Múi giờ</Label>
                   <Select defaultValue="pst">
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="pst">Pacific Time (PT)</SelectItem>
-                      <SelectItem value="est">Eastern Time (ET)</SelectItem>
-                      <SelectItem value="cst">Central Time (CT)</SelectItem>
+                      <SelectItem value="pst">Giờ Thái Bình Dương (PT)</SelectItem>
+                      <SelectItem value="est">Giờ Miền Đông (ET)</SelectItem>
+                      <SelectItem value="cst">Giờ Miền Trung (CT)</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
-                <Button>Save Changes</Button>
+                <Button>Lưu thay đổi</Button>
               </CardContent>
             </Card>
           </TabsContent>
@@ -68,8 +68,8 @@ export default function SettingsPage() {
           <TabsContent value="roles" className="space-y-4 mt-4">
             <Card>
               <CardHeader>
-                <CardTitle className="text-base flex items-center gap-2"><Users className="h-4 w-4" /> Family Members</CardTitle>
-                <CardDescription>Manage who has access and their roles.</CardDescription>
+                <CardTitle className="text-base flex items-center gap-2"><Users className="h-4 w-4" /> Thành viên gia đình</CardTitle>
+                <CardDescription>Quản lý người có quyền truy cập và vai trò của họ.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
                 {familyMembers.map((m, i) => (
@@ -80,11 +80,11 @@ export default function SettingsPage() {
                     </div>
                     <div className="flex items-center gap-2">
                       <Badge variant="secondary">{m.role}</Badge>
-                      <Button size="sm" variant="ghost">Edit</Button>
+                      <Button size="sm" variant="ghost">Sửa</Button>
                     </div>
                   </div>
                 ))}
-                <Button variant="outline" className="mt-2">+ Add Family Member</Button>
+                <Button variant="outline" className="mt-2">+ Thêm thành viên gia đình</Button>
               </CardContent>
             </Card>
           </TabsContent>
@@ -92,14 +92,14 @@ export default function SettingsPage() {
           <TabsContent value="privacy" className="space-y-4 mt-4">
             <Card>
               <CardHeader>
-                <CardTitle className="text-base flex items-center gap-2"><Shield className="h-4 w-4" /> Privacy & Data</CardTitle>
+                <CardTitle className="text-base flex items-center gap-2"><Shield className="h-4 w-4" /> Quyền riêng tư và dữ liệu</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 {[
-                  { label: "Share anonymized data for AI improvement", desc: "Help improve TeenCare's AI with anonymous usage data", default: true },
-                  { label: "Allow teen to view their own reports", desc: "Emma can see her wellness scores and activity summaries", default: true },
-                  { label: "Location tracking", desc: "Track device location for safety alerts", default: false },
-                  { label: "Social media monitoring", desc: "Monitor public social media activity for safety signals", default: true },
+                  { label: "Chia sẻ dữ liệu ẩn danh để cải thiện AI", desc: "Giúp cải thiện AI của TeenCare bằng dữ liệu sử dụng đã ẩn danh", default: true },
+                  { label: "Cho phép con xem báo cáo của mình", desc: "Emma có thể xem điểm sức khỏe và tổng hợp hoạt động của mình", default: true },
+                  { label: "Theo dõi vị trí", desc: "Theo dõi vị trí thiết bị để phát cảnh báo an toàn", default: false },
+                  { label: "Theo dõi mạng xã hội", desc: "Giám sát hoạt động mạng xã hội công khai để phát hiện tín hiệu rủi ro", default: true },
                 ].map((s, i) => (
                   <div key={i} className="flex items-center justify-between">
                     <div>
@@ -116,14 +116,14 @@ export default function SettingsPage() {
           <TabsContent value="notifications" className="space-y-4 mt-4">
             <Card>
               <CardHeader>
-                <CardTitle className="text-base flex items-center gap-2"><Bell className="h-4 w-4" /> Notification Preferences</CardTitle>
+                <CardTitle className="text-base flex items-center gap-2"><Bell className="h-4 w-4" /> Tùy chọn thông báo</CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
                 {[
-                  { label: "Safety alerts", desc: "High-priority alerts about concerning activity", default: true },
-                  { label: "Weekly wellness reports", desc: "Summary of your family's wellness data", default: true },
-                  { label: "Mentor reminders", desc: "Upcoming session reminders", default: true },
-                  { label: "AI recommendations", desc: "New parenting tips and insights", default: false },
+                  { label: "Cảnh báo an toàn", desc: "Cảnh báo ưu tiên cao về các hoạt động đáng lo ngại", default: true },
+                  { label: "Báo cáo sức khỏe hàng tuần", desc: "Tóm tắt dữ liệu sức khỏe của gia đình", default: true },
+                  { label: "Nhắc lịch cố vấn", desc: "Nhắc các buổi tư vấn sắp tới", default: true },
+                  { label: "Gợi ý từ AI", desc: "Mẹo nuôi dạy và phân tích mới", default: false },
                 ].map((s, i) => (
                   <div key={i} className="flex items-center justify-between">
                     <div>

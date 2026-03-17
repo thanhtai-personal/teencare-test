@@ -68,13 +68,13 @@ const DAY_OPTIONS: DayOfWeek[] = [
 ];
 
 const DAY_LABELS: Record<DayOfWeek, string> = {
-  Monday: "Mon",
-  Tuesday: "Tue",
-  Wednesday: "Wed",
-  Thursday: "Thu",
-  Friday: "Fri",
-  Saturday: "Sat",
-  Sunday: "Sun",
+  Monday: "Th 2",
+  Tuesday: "Th 3",
+  Wednesday: "Th 4",
+  Thursday: "Th 5",
+  Friday: "Th 6",
+  Saturday: "Th 7",
+  Sunday: "CN",
 };
 
 const DEFAULT_PARENT_FORM = {
@@ -137,7 +137,7 @@ function pickError(payload: ApiPayload<unknown>): string {
     return payload.error;
   }
 
-  return "Unexpected error.";
+  return "Có lỗi không mong muốn.";
 }
 
 export default function ParentDashboard() {
@@ -244,7 +244,7 @@ export default function ParentDashboard() {
 
       setParentForm(DEFAULT_PARENT_FORM);
       await loadParents();
-      setSuccess("Parent created.");
+      setSuccess("Đã tạo phụ huynh.");
     });
   };
 
@@ -268,7 +268,7 @@ export default function ParentDashboard() {
 
       setStudentForm(DEFAULT_STUDENT_FORM);
       await loadStudents();
-      setSuccess("Student created.");
+      setSuccess("Đã tạo học sinh.");
     });
   };
 
@@ -292,7 +292,7 @@ export default function ParentDashboard() {
 
       setClassForm(DEFAULT_CLASS_FORM);
       await loadClasses();
-      setSuccess("Class created.");
+      setSuccess("Đã tạo lớp học.");
     });
   };
 
@@ -317,7 +317,7 @@ export default function ParentDashboard() {
       if (!response.ok) throw new Error(pickError(payload));
 
       setSubscriptionForm(DEFAULT_SUBSCRIPTION_FORM);
-      setSuccess("Subscription created.");
+      setSuccess("Đã tạo gói học.");
     });
   };
 
@@ -342,7 +342,7 @@ export default function ParentDashboard() {
 
       setRegisterForm(DEFAULT_REGISTER_FORM);
       await loadClasses();
-      setSuccess("Class registration completed.");
+      setSuccess("Đăng ký lớp thành công.");
     });
   };
 
@@ -353,7 +353,7 @@ export default function ParentDashboard() {
           <div>
             <h1 className="text-2xl font-bold">TeenUp Mini LMS</h1>
             <p className="text-sm text-muted-foreground">
-              Manage Parent, Student, Class, Subscription and Registration.
+              Quản lý Phụ huynh, Học sinh, Lớp học, Gói học và Đăng ký.
             </p>
           </div>
           <Button
@@ -361,12 +361,12 @@ export default function ParentDashboard() {
             onClick={() => {
               void runSubmit(async () => {
                 await refreshAll();
-                setSuccess("Data refreshed.");
+                setSuccess("Đã làm mới dữ liệu.");
               });
             }}
             disabled={isSubmitting}
           >
-            Refresh
+            Làm mới
           </Button>
         </div>
 
@@ -385,7 +385,7 @@ export default function ParentDashboard() {
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Parents</CardTitle>
+              <CardTitle className="text-base">Phụ huynh</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-2xl font-semibold">{parents.length}</p>
@@ -393,7 +393,7 @@ export default function ParentDashboard() {
           </Card>
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Students</CardTitle>
+              <CardTitle className="text-base">Học sinh</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-2xl font-semibold">{students.length}</p>
@@ -401,7 +401,7 @@ export default function ParentDashboard() {
           </Card>
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Classes</CardTitle>
+              <CardTitle className="text-base">Lớp học</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-2xl font-semibold">{classes.length}</p>
@@ -409,10 +409,10 @@ export default function ParentDashboard() {
           </Card>
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Loading</CardTitle>
+              <CardTitle className="text-base">Đang tải</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-2xl font-semibold">{isLoading ? "Yes" : "No"}</p>
+              <p className="text-2xl font-semibold">{isLoading ? "Có" : "Không"}</p>
             </CardContent>
           </Card>
         </div>
@@ -420,12 +420,12 @@ export default function ParentDashboard() {
         <div className="grid gap-6 xl:grid-cols-2">
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Create Parent</CardTitle>
+              <CardTitle className="text-base">Tạo phụ huynh</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleCreateParent} className="space-y-3">
                 <div className="space-y-1">
-                  <Label>Name</Label>
+                  <Label>Họ và tên</Label>
                   <Input
                     value={parentForm.name}
                     onChange={(event) =>
@@ -435,7 +435,7 @@ export default function ParentDashboard() {
                   />
                 </div>
                 <div className="space-y-1">
-                  <Label>Phone</Label>
+                  <Label>Số điện thoại</Label>
                   <Input
                     value={parentForm.phone}
                     onChange={(event) =>
@@ -456,7 +456,7 @@ export default function ParentDashboard() {
                   />
                 </div>
                 <Button type="submit" disabled={isSubmitting}>
-                  Save Parent
+                  Lưu phụ huynh
                 </Button>
               </form>
             </CardContent>
@@ -464,12 +464,12 @@ export default function ParentDashboard() {
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Create Student</CardTitle>
+              <CardTitle className="text-base">Tạo học sinh</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleCreateStudent} className="space-y-3">
                 <div className="space-y-1">
-                  <Label>Name</Label>
+                  <Label>Họ và tên</Label>
                   <Input
                     value={studentForm.name}
                     onChange={(event) =>
@@ -479,7 +479,7 @@ export default function ParentDashboard() {
                   />
                 </div>
                 <div className="space-y-1">
-                  <Label>Date of Birth</Label>
+                  <Label>Ngày sinh</Label>
                   <Input
                     type="date"
                     value={studentForm.dob}
@@ -490,18 +490,18 @@ export default function ParentDashboard() {
                   />
                 </div>
                 <div className="space-y-1">
-                  <Label>Gender</Label>
+                  <Label>Giới tính</Label>
                   <Input
                     value={studentForm.gender}
                     onChange={(event) =>
                       setStudentForm((prev) => ({ ...prev, gender: event.target.value }))
                     }
-                    placeholder="male/female"
+                    placeholder="nam/nữ"
                     required
                   />
                 </div>
                 <div className="space-y-1">
-                  <Label>Current Grade</Label>
+                  <Label>Lớp hiện tại</Label>
                   <Input
                     value={studentForm.current_grade}
                     onChange={(event) =>
@@ -511,7 +511,7 @@ export default function ParentDashboard() {
                   />
                 </div>
                 <div className="space-y-1">
-                  <Label>Parent</Label>
+                  <Label>Phụ huynh</Label>
                   <Select
                     value={studentForm.parent_id}
                     onValueChange={(value) =>
@@ -519,7 +519,7 @@ export default function ParentDashboard() {
                     }
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Select parent" />
+                      <SelectValue placeholder="Chọn phụ huynh" />
                     </SelectTrigger>
                     <SelectContent>
                       {parents.map((parent) => (
@@ -531,7 +531,7 @@ export default function ParentDashboard() {
                   </Select>
                 </div>
                 <Button type="submit" disabled={isSubmitting || parents.length === 0}>
-                  Save Student
+                  Lưu học sinh
                 </Button>
               </form>
             </CardContent>
@@ -539,12 +539,12 @@ export default function ParentDashboard() {
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Create Class</CardTitle>
+              <CardTitle className="text-base">Tạo lớp học</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleCreateClass} className="space-y-3">
                 <div className="space-y-1">
-                  <Label>Name</Label>
+                  <Label>Tên lớp</Label>
                   <Input
                     value={classForm.name}
                     onChange={(event) =>
@@ -554,7 +554,7 @@ export default function ParentDashboard() {
                   />
                 </div>
                 <div className="space-y-1">
-                  <Label>Subject</Label>
+                  <Label>Môn học</Label>
                   <Input
                     value={classForm.subject}
                     onChange={(event) =>
@@ -564,7 +564,7 @@ export default function ParentDashboard() {
                   />
                 </div>
                 <div className="space-y-1">
-                  <Label>Day</Label>
+                  <Label>Thứ</Label>
                   <Select
                     value={classForm.day_of_week}
                     onValueChange={(value: DayOfWeek) =>
@@ -574,17 +574,17 @@ export default function ParentDashboard() {
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                      <SelectContent>
                       {DAY_OPTIONS.map((day) => (
                         <SelectItem key={day} value={day}>
-                          {day}
+                          {DAY_LABELS[day]}
                         </SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="space-y-1">
-                  <Label>Time Slot</Label>
+                  <Label>Khung giờ</Label>
                   <Input
                     value={classForm.time_slot}
                     onChange={(event) =>
@@ -595,7 +595,7 @@ export default function ParentDashboard() {
                   />
                 </div>
                 <div className="space-y-1">
-                  <Label>Teacher</Label>
+                  <Label>Giáo viên</Label>
                   <Input
                     value={classForm.teacher_name}
                     onChange={(event) =>
@@ -605,7 +605,7 @@ export default function ParentDashboard() {
                   />
                 </div>
                 <div className="space-y-1">
-                  <Label>Max Students</Label>
+                  <Label>Sĩ số tối đa</Label>
                   <Input
                     type="number"
                     min={1}
@@ -617,7 +617,7 @@ export default function ParentDashboard() {
                   />
                 </div>
                 <Button type="submit" disabled={isSubmitting}>
-                  Save Class
+                  Lưu lớp học
                 </Button>
               </form>
             </CardContent>
@@ -625,12 +625,12 @@ export default function ParentDashboard() {
 
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Create Subscription</CardTitle>
+              <CardTitle className="text-base">Tạo gói học</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleCreateSubscription} className="space-y-3">
                 <div className="space-y-1">
-                  <Label>Student</Label>
+                  <Label>Học sinh</Label>
                   <Select
                     value={subscriptionForm.student_id}
                     onValueChange={(value) =>
@@ -638,7 +638,7 @@ export default function ParentDashboard() {
                     }
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Select student" />
+                      <SelectValue placeholder="Chọn học sinh" />
                     </SelectTrigger>
                     <SelectContent>
                       {students.map((student) => (
@@ -650,7 +650,7 @@ export default function ParentDashboard() {
                   </Select>
                 </div>
                 <div className="space-y-1">
-                  <Label>Package Name</Label>
+                  <Label>Tên gói</Label>
                   <Input
                     value={subscriptionForm.package_name}
                     onChange={(event) =>
@@ -661,7 +661,7 @@ export default function ParentDashboard() {
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1">
-                    <Label>Total Sessions</Label>
+                    <Label>Tổng số buổi</Label>
                     <Input
                       type="number"
                       min={1}
@@ -673,7 +673,7 @@ export default function ParentDashboard() {
                     />
                   </div>
                   <div className="space-y-1">
-                    <Label>Used Sessions</Label>
+                    <Label>Số buổi đã dùng</Label>
                     <Input
                       type="number"
                       min={0}
@@ -686,7 +686,7 @@ export default function ParentDashboard() {
                   </div>
                 </div>
                 <div className="space-y-1">
-                  <Label>End Date</Label>
+                  <Label>Ngày hết hạn</Label>
                   <Input
                     type="date"
                     value={subscriptionForm.end_date}
@@ -697,7 +697,7 @@ export default function ParentDashboard() {
                   />
                 </div>
                 <Button type="submit" disabled={isSubmitting || students.length === 0}>
-                  Save Subscription
+                  Lưu gói học
                 </Button>
               </form>
             </CardContent>
@@ -706,7 +706,7 @@ export default function ParentDashboard() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Register Student To Class</CardTitle>
+            <CardTitle className="text-base">Đăng ký học sinh vào lớp</CardTitle>
           </CardHeader>
           <CardContent>
             <form
@@ -714,7 +714,7 @@ export default function ParentDashboard() {
               className="grid gap-3 md:grid-cols-[1fr_1fr_auto] md:items-end"
             >
               <div className="space-y-1">
-                <Label>Student</Label>
+                <Label>Học sinh</Label>
                 <Select
                   value={registerForm.student_id}
                   onValueChange={(value) =>
@@ -722,7 +722,7 @@ export default function ParentDashboard() {
                   }
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select student" />
+                    <SelectValue placeholder="Chọn học sinh" />
                   </SelectTrigger>
                   <SelectContent>
                     {students.map((student) => (
@@ -734,7 +734,7 @@ export default function ParentDashboard() {
                 </Select>
               </div>
               <div className="space-y-1">
-                <Label>Class</Label>
+                <Label>Lớp học</Label>
                 <Select
                   value={registerForm.class_id}
                   onValueChange={(value) =>
@@ -742,12 +742,12 @@ export default function ParentDashboard() {
                   }
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select class" />
+                    <SelectValue placeholder="Chọn lớp học" />
                   </SelectTrigger>
                   <SelectContent>
                     {classes.map((classItem) => (
                       <SelectItem key={classItem.id} value={String(classItem.id)}>
-                        {classItem.name} ({classItem.day_of_week} {classItem.time_slot})
+                        {classItem.name} ({DAY_LABELS[classItem.day_of_week]} {classItem.time_slot})
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -763,7 +763,7 @@ export default function ParentDashboard() {
                   !registerForm.class_id
                 }
               >
-                Register
+                Đăng ký
               </Button>
             </form>
           </CardContent>
@@ -771,7 +771,7 @@ export default function ParentDashboard() {
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Classes By Weekday</CardTitle>
+            <CardTitle className="text-base">Lớp học theo thứ</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-7">
@@ -786,7 +786,7 @@ export default function ParentDashboard() {
 
                   <div className="space-y-2">
                     {items.length === 0 ? (
-                      <p className="text-xs text-muted-foreground">No class</p>
+                      <p className="text-xs text-muted-foreground">Không có lớp</p>
                     ) : (
                       items.map((classItem) => {
                         const isFull = classItem.registered_students >= classItem.max_students;

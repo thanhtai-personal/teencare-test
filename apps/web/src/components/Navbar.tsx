@@ -13,7 +13,7 @@ export function Navbar() {
         <div className="relative">
           <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
-            placeholder="Search..."
+            placeholder="Tìm kiếm..."
             className="pl-9 h-8 bg-secondary border-none"
           />
         </div>

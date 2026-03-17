@@ -3,8 +3,8 @@ import "./globals.css";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-  title: "TeenCare UI Kit",
-  description: "TeenCare dashboard UI",
+  title: "TeenUp Mini LMS",
+  description: "Bảng điều khiển TeenUp Mini LMS",
 };
 
 export default function RootLayout({
@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="vi" suppressHydrationWarning>
       <body>
         <Providers>{children}</Providers>
       </body>
