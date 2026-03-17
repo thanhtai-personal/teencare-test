@@ -2,11 +2,6 @@
 
 import {
   LayoutDashboard,
-  UserCircle,
-  MessageSquare,
-  Users,
-  Bell,
-  Settings,
   Heart,
 } from "lucide-react";
 import { NavLink } from "@/components/NavLink";
@@ -25,21 +20,13 @@ import {
 } from "@/components/ui/sidebar";
 
 const mainItems = [
-  { title: "Dashboard", url: "/", icon: LayoutDashboard },
-  { title: "Child Profile", url: "/child-profile", icon: UserCircle },
-  { title: "AI Copilot", url: "/ai-copilot", icon: MessageSquare },
-  { title: "Mentor Hub", url: "/mentor", icon: Users },
-];
-
-const secondaryItems = [
-  { title: "Alerts", url: "/alerts", icon: Bell },
-  { title: "Settings", url: "/settings", icon: Settings },
+  { title: "LMS Home", url: "/", icon: LayoutDashboard },
 ];
 
 export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
-  const pathname = usePathname();
+  const pathname = usePathname() ?? "/";
   const isActive = (path: string) =>
     path === "/" ? pathname === "/" : pathname === path || pathname.startsWith(`${path}/`);
 
@@ -50,7 +37,7 @@ export function AppSidebar() {
           <Heart className="h-6 w-6 text-sidebar-primary shrink-0" />
           {!collapsed && (
             <span className="text-lg font-bold text-sidebar-primary-foreground">
-              TeenCare
+              TeenUp LMS
             </span>
           )}
         </div>
@@ -64,23 +51,6 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild isActive={isActive(item.url)}>
                     <NavLink to={item.url} end={item.url === "/"}>
-                      <item.icon className="h-4 w-4" />
-                      {!collapsed && <span>{item.title}</span>}
-                    </NavLink>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-        <SidebarGroup>
-          <SidebarGroupLabel>System</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {secondaryItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={isActive(item.url)}>
-                    <NavLink to={item.url}>
                       <item.icon className="h-4 w-4" />
                       {!collapsed && <span>{item.title}</span>}
                     </NavLink>

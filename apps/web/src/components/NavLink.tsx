@@ -15,7 +15,7 @@ interface NavLinkCompatProps extends Omit<React.ComponentProps<typeof Link>, "hr
 
 const NavLink = forwardRef<HTMLAnchorElement, NavLinkCompatProps>(
   ({ className, activeClassName, to, end, ...props }, ref) => {
-    const pathname = usePathname();
+    const pathname = usePathname() ?? "/";
     const isActive = end ? pathname === to : pathname === to || pathname.startsWith(`${to}/`);
 
     return (

@@ -67,7 +67,7 @@ export async function POST(request: Request, context: ClassRegisterContext) {
       [parsedClassId, studentId],
     );
 
-    if (duplicateRegistration.rowCount > 0) {
+    if ((duplicateRegistration.rowCount ?? 0) > 0) {
       await client.query("ROLLBACK");
       return jsonError("Student already registered in this class.", 409);
     }
