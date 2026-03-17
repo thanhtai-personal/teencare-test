@@ -12,7 +12,7 @@ export async function GET(_request: Request, context: SubscriptionRouteContext) 
   const subscriptionId = parsePositiveInt(id);
 
   if (!subscriptionId) {
-    return jsonError("Invalid subscription id.", 400);
+    return jsonError("ID gói học không hợp lệ.", 400);
   }
 
   try {
@@ -34,11 +34,11 @@ export async function GET(_request: Request, context: SubscriptionRouteContext) 
     );
 
     if (result.rowCount === 0) {
-      return jsonError("Subscription not found.", 404);
+      return jsonError("Không tìm thấy gói học.", 404);
     }
 
     return Response.json({ data: result.rows[0] });
   } catch (error) {
-    return jsonError("Failed to fetch subscription.", 500, (error as Error).message);
+    return jsonError("Không thể tải gói học.", 500, (error as Error).message);
   }
 }

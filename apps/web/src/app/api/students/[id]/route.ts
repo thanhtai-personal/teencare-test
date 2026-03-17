@@ -12,7 +12,7 @@ export async function GET(_request: Request, context: StudentRouteContext) {
   const studentId = parsePositiveInt(id);
 
   if (!studentId) {
-    return jsonError("Invalid student id.", 400);
+    return jsonError("ID học sinh không hợp lệ.", 400);
   }
 
   try {
@@ -35,7 +35,7 @@ export async function GET(_request: Request, context: StudentRouteContext) {
     );
 
     if (result.rowCount === 0) {
-      return jsonError("Student not found.", 404);
+      return jsonError("Không tìm thấy học sinh.", 404);
     }
 
     const row = result.rows[0];
@@ -57,6 +57,6 @@ export async function GET(_request: Request, context: StudentRouteContext) {
       },
     });
   } catch (error) {
-    return jsonError("Failed to fetch student.", 500, (error as Error).message);
+    return jsonError("Không thể tải học sinh.", 500, (error as Error).message);
   }
 }

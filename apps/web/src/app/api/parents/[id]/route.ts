@@ -12,7 +12,7 @@ export async function GET(_request: Request, context: ParentRouteContext) {
   const parentId = parsePositiveInt(id);
 
   if (!parentId) {
-    return jsonError("Invalid parent id.", 400);
+    return jsonError("ID phụ huynh không hợp lệ.", 400);
   }
 
   try {
@@ -25,11 +25,11 @@ export async function GET(_request: Request, context: ParentRouteContext) {
     );
 
     if (result.rowCount === 0) {
-      return jsonError("Parent not found.", 404);
+      return jsonError("Không tìm thấy phụ huynh.", 404);
     }
 
     return Response.json({ data: result.rows[0] });
   } catch (error) {
-    return jsonError("Failed to fetch parent.", 500, (error as Error).message);
+    return jsonError("Không thể tải phụ huynh.", 500, (error as Error).message);
   }
 }

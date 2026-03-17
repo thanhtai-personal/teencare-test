@@ -14,7 +14,7 @@ export async function POST(request: Request) {
   const parsed = subscriptionInputSchema.safeParse(body);
 
   if (!parsed.success) {
-    return jsonError("Invalid subscription payload.", 400, formatZodError(parsed.error));
+    return jsonError("Dữ liệu gói học không hợp lệ.", 400, formatZodError(parsed.error));
   }
 
   try {
@@ -22,7 +22,7 @@ export async function POST(request: Request) {
 
     const student = await db.query("SELECT id FROM students WHERE id = $1", [parsed.data.student_id]);
     if (student.rowCount === 0) {
-      return jsonError("Student not found.", 404);
+      return jsonError("Không tìm thấy học sinh.", 404);
     }
 
     const result = await db.query(
@@ -41,9 +41,9 @@ export async function POST(request: Request) {
     return Response.json({ data: result.rows[0] }, { status: 201 });
   } catch (error) {
     if (getPgErrorCode(error) === "23503") {
-      return jsonError("Invalid student_id.", 400);
+      return jsonError("student_id không hợp lệ.", 400);
     }
 
-    return jsonError("Failed to create subscription.", 500, (error as Error).message);
+    return jsonError("Không thể tạo gói học.", 500, (error as Error).message);
   }
 }

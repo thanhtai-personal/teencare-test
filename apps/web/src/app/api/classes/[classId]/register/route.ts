@@ -19,14 +19,14 @@ export async function POST(request: Request, context: ClassRegisterContext) {
   const parsedClassId = parsePositiveInt(classId);
 
   if (!parsedClassId) {
-    return jsonError("Invalid class id.", 400);
+    return jsonError("ID lớp học không hợp lệ.", 400);
   }
 
   const body = await parseRequestBody(request);
   const parsedBody = classRegisterInputSchema.safeParse(body);
 
   if (!parsedBody.success) {
-    return jsonError("Invalid register payload.", 400, formatZodError(parsedBody.error));
+    return jsonError("Dữ liệu đăng ký không hợp lệ.", 400, formatZodError(parsedBody.error));
   }
 
   const db = getDbPool();
@@ -46,7 +46,7 @@ export async function POST(request: Request, context: ClassRegisterContext) {
 
     if (classResult.rowCount === 0) {
       await client.query("ROLLBACK");
-      return jsonError("Class not found.", 404);
+      return jsonError("Không tìm thấy lớp học.", 404);
     }
 
     const studentId = parsedBody.data.student_id;
@@ -57,7 +57,7 @@ export async function POST(request: Request, context: ClassRegisterContext) {
     );
     if (studentResult.rowCount === 0) {
       await client.query("ROLLBACK");
-      return jsonError("Student not found.", 404);
+      return jsonError("Không tìm thấy học sinh.", 404);
     }
 
     const duplicateRegistration = await client.query(
@@ -69,7 +69,7 @@ export async function POST(request: Request, context: ClassRegisterContext) {
 
     if ((duplicateRegistration.rowCount ?? 0) > 0) {
       await client.query("ROLLBACK");
-      return jsonError("Student already registered in this class.", 409);
+      return jsonError("Học sinh đã đăng ký lớp này.", 409);
     }
 
     const capacityResult = await client.query(
@@ -84,7 +84,7 @@ export async function POST(request: Request, context: ClassRegisterContext) {
 
     if (registered >= maxStudents) {
       await client.query("ROLLBACK");
-      return jsonError("Class is full.", 409);
+      return jsonError("Lớp học đã đủ sĩ số.", 409);
     }
 
     const subscriptionResult = await client.query(
@@ -102,7 +102,7 @@ export async function POST(request: Request, context: ClassRegisterContext) {
     if (subscriptionResult.rowCount === 0) {
       await client.query("ROLLBACK");
       return jsonError(
-        "Student does not have an active subscription with remaining sessions.",
+        "Học sinh không có gói học còn hạn hoặc đã hết buổi.",
         409,
       );
     }
@@ -146,10 +146,10 @@ export async function POST(request: Request, context: ClassRegisterContext) {
     }
 
     if (getPgErrorCode(error) === "23505") {
-      return jsonError("Student already registered in this class.", 409);
+      return jsonError("Học sinh đã đăng ký lớp này.", 409);
     }
 
-    return jsonError("Failed to register class.", 500, (error as Error).message);
+    return jsonError("Không thể đăng ký lớp học.", 500, (error as Error).message);
   } finally {
     client.release();
   }

@@ -2,7 +2,7 @@ import { DashboardLayout } from "@/components/DashboardLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Bell, AlertTriangle, Lightbulb, CheckCircle, Shield } from "lucide-react";
+import { Bell, AlertTriangle, Lightbulb, Shield } from "lucide-react";
 
 const alerts = [
   { id: 1, severity: "high" as const, title: "Sử dụng điện thoại khuya bất thường", desc: "Đêm qua Emma dùng điện thoại trong khoảng 1–3 giờ sáng, khác với thói quen thường ngày.", time: "3 giờ trước", icon: AlertTriangle },

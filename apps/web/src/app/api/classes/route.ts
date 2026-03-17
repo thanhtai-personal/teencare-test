@@ -25,7 +25,7 @@ export async function GET(request: Request) {
   if (day) {
     const dayParse = dayOfWeekSchema.safeParse(day);
     if (!dayParse.success) {
-      return jsonError("Invalid day query.", 400, ["day must be Monday-Sunday"]);
+      return jsonError("Tham số day không hợp lệ.", 400, ["day phải nằm trong Monday-Sunday"]);
     }
   }
 
@@ -51,7 +51,7 @@ export async function GET(request: Request) {
 
     return Response.json({ data: result.rows });
   } catch (error) {
-    return jsonError("Failed to fetch classes.", 500, (error as Error).message);
+    return jsonError("Không thể tải danh sách lớp học.", 500, (error as Error).message);
   }
 }
 
@@ -60,7 +60,7 @@ export async function POST(request: Request) {
   const parsed = classInputSchema.safeParse(body);
 
   if (!parsed.success) {
-    return jsonError("Invalid class payload.", 400, formatZodError(parsed.error));
+    return jsonError("Dữ liệu lớp học không hợp lệ.", 400, formatZodError(parsed.error));
   }
 
   try {
@@ -81,6 +81,6 @@ export async function POST(request: Request) {
 
     return Response.json({ data: result.rows[0] }, { status: 201 });
   } catch (error) {
-    return jsonError("Failed to create class.", 500, (error as Error).message);
+    return jsonError("Không thể tạo lớp học.", 500, (error as Error).message);
   }
 }
